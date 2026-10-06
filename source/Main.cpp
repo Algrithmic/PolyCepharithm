@@ -1,35 +1,17 @@
 #include <iostream>
+#include <stdexcept>
 
-extern "C" {
-    #include "glad/glad.h"
-    #include "glfw3.h"
-}
+#include "Application.hpp"
 
 int main( void ) {
-    if (!glfwInit()) 
-        return -1;
-
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Hello", nullptr, nullptr);
-    if (!window) { 
-        glfwTerminate(); 
-        return -1; 
+    try {
+        Application app;
+        app.run();
     }
-
-    glfwMakeContextCurrent(window);
-
-    if (!gladLoadGL()) {
-        glfwDestroyWindow(window);
-        glfwTerminate();
-        return -1;
+    catch (std::exception const &e) {
+        std::cerr << "Fatal: " << e.what() << '\n';
+        return 1;
     }
-
-    while (!glfwWindowShouldClose(window)) {
-        glClear(GL_COLOR_BUFFER_BIT);
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-
-    glfwTerminate();
 
     return 0;
 }
