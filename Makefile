@@ -26,7 +26,7 @@ ifneq ($(findstring MINGW64, $(UNAME_S)), ) # Link Windows GLFW Libraries
 	TARGET  := $(BUILD_DIR)/$(PROGNAME).exe 
 endif
 
-SOURCES := $(wildcard $(SOURCE_DIR)/*.cpp)
+SOURCES := $(shell find $(SOURCE_DIR) -name '*.cpp')
 OBJECTS := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BUILD_DIR)/%.o)
 DEPS    := $(OBJECTS:.o=.d)
 
@@ -38,7 +38,7 @@ $(TARGET): $(OBJECTS)
 	$(CXX) $(OBJECTS) -o $@ $(LDLIBS) $(LDFLAGS)
 
 $(BUILD_DIR)/%.o: $(SOURCE_DIR)/%.cpp
-	$(shell mkdir -p $(BUILD_DIR))
+	@mkdir -p $(@D)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 clean:
