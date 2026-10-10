@@ -6,17 +6,19 @@
 #include <filesystem>
 
 namespace GL {
+    typedef unsigned int GLuint;
+
     class Shader {
     private:
-        std::uint32_t m_shaderid;
+        GLuint m_shaderid;
     public:
-        Shader(std::filesystem::path filename);
+        explicit Shader(std::filesystem::path filename);
         ~Shader();
 
         Shader(Shader const &)             = delete;
         Shader &operator =(Shader const &) = delete;
 
-        std::uint32_t shaderID(void) const noexcept { return m_shaderid; }
+        GLuint shaderID(void) const noexcept { return m_shaderid; }
     };
 }
 

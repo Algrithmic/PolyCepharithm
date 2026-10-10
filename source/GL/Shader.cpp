@@ -10,11 +10,11 @@ extern "C" {
 #include "GL/Shader.hpp"
 
 namespace {
-    std::int32_t shaderCompilationStatus(std::uint32_t shader, std::string const &filename) {
+    GLint shaderCompilationStatus(GLuint shader, std::string const &filename) {
         using namespace std;
         
         constexpr size_t msg_size = 512;
-        int32_t success = 0;
+        GLint success = 0;
         string info_log(msg_size, '\0');
 
         glGetShaderiv(shader, GL_COMPILE_STATUS, &success);

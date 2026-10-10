@@ -11,7 +11,7 @@ extern "C" {
 #include "GL/Shader.hpp"
 
 namespace {
-    std::int32_t programCompilationStatus(std::uint32_t program) {
+    std::int32_t programCompilationStatus(GLuint program) {
         using namespace std;
         
         constexpr size_t msg_size = 512;
